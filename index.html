@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>コーヒーレシピ変換器</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css"> <!-- リセットCSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@700&family=M+PLUS+2:wght@100..900&family=M+PLUS+Rounded+1c&family=Shippori+Mincho&display=swap" rel="stylesheet">
+    <!-- レスポンシブ対応 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ファビコン -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- OGP -->
+    <meta property="og:title" content="コーヒーレシピ変換器">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://hiruge-tools.com/Coffee-fitting/">
+    <meta property="og:image" content="http://hiruge-tools.com/Coffee-fitting/images/ogp.png">
+    <meta property="og:description" content="コーヒーの味を保ちながら量を変えるための変換器">
+    <!-- SEO -->
+    <meta name="description" content="コーヒーレシピ変換器">
+    <meta name="description" content="Coffee-fitting">
+    <meta name="description" content="コーヒー">
+    <meta name="description" content="レシピ">
+    <meta name="description" content="変換">
+    <meta name="description" content="コーヒーの味を保ちながら量を変えるための変換器">
+</head>
+
+<body>
+
+    <!-- 規定文字数入力されたら次のフォームにフォーカスを移すユーザー補助(本当はJavaScriptファイルに書きたいけど、事前に宣言しておく必要があるので一旦ここに置く) -->
+    <script>
+        function nextField(str) {
+            if (str.value.length >= str.maxLength) {
+                for (var i = 0, elm = str.form.elements; i < elm.length; i++) {
+                    if (elm[i] == str) {
+                        (elm[i + 1] || elm[0]).focus();
+                        break;
+                    }
+                }
+            }
+            return (str);
+        }
+    </script>
+
+    <header>
+        <h1>コーヒーレシピ変換器</h1>
+    </header>
+
+    <div class="introduce">
+        <h2 class="sub-title">バランスキープ、量変換。<br>既存レシピの調整に</h2>
+        <a href="how-to-use.html" target="_blank">変換器の使い方(別タブで開きます)</a>
+    </div>
+
+    <!-- コンテンツはFlexBoxでレイアウト指定する -->
+    <div class="container">
+        <div class="item origin-recipe-div">
+            <h3>変換前レシピ入力欄</h3>
+            <form action="#">
+                <!--変換前レシピの投数入力欄-->
+                <div>
+                    <label for="pour-times-input">変換前レシピの投数: </label>
+                    <input type="text" id="pour-times-input" maxlength="1" onkeyup="nextField(this)"> 投
+                </div>
+                <!--変換前レシピの豆量入力欄-->
+                <div>
+                    <label for="bean-input">変換前レシピの豆量(g): </label><input type="text" id="bean-input" maxlength="2" onkeyup="nextField(this)"> g
+                </div>
+                <!-- 変換前レシピの比率表示欄 -->
+                <div>
+                    <p>変換前の豆と湯の比率: 1:<span id="origin-ratio"></span></p>
+                </div>
+                <!--変換前レシピの入力欄(pour-times-inputの投数分だけフォームを生成)-->
+                <h4>変換前レシピ</h4>
+                    <p>投数 経過時間 総注湯量</p>
+                    <div class="origin-process"><!--変換前レシピの入力欄を生成するためのdiv-->
+                        <!-- 1･2投目は確実に使うだろうから最初から表示しておく -->
+                        <div class="pour-step1">
+                            <label>1投目</label>
+                            <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input type="text" class="seconds" value="00" maxlength="2" onkeyup="nextField(this)">
+                            <input type="text" class="pour-ml wide-input" value="30" maxlength="2" onkeyup="nextField(this)"> ml
+                        </div>
+                        <div class="pour-step2">
+                            <label>2投目</label>
+                            <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input type="text" class="seconds" value="30" maxlength="2" onkeyup="nextField(this)">
+                            <input type="text" class="pour-ml wide-input" maxlength="3" onkeyup="nextField(this)"> ml
+                        </div>
+                    </div>
+            </form>
+        </div> <!--/変換前レシピの入力欄-->
+
+        <!--変換目標入力欄-->
+        <!-- todo:"倍率"入力欄を作り、それを入力するだけで比率を維持したままn倍できる機能を実装 -->
+        <div class="item target-recipe-div">
+            <form action="#">
+                <h3>変換目標入力欄</h3>
+                <div>
+                    <label for="bean-target">変換後の豆量(g): </label>
+                    <input type="text" id="bean-target" class="targetProcessComplete_argument wide-input"> g
+                </div>
+                <div>
+                    <label for="water-target">変換後の総湯量(ml): </label>
+                    <input type="text" id="water-target" class="targetProcessComplete_argument wide-input"> ml
+                </div>
+                <div>
+                    <label for="ratio-target" class="targetProcessComplete_argument">変換後の豆と湯の比率: 1:</label>
+                    <input type="text" id="ratio-target" class="targetProcessComplete_argument wide-input">
+                </div>
+                <div>
+                    <!-- 単純な倍率での入力 -->
+                    <label for="magnification">倍率: </label>
+                    <input type="text" id="magnification" class="targetProcessComplete_argument wide-input">倍
+                </div>
+                <div>
+                    <!--蒸らし固定ON/OFF-->
+                    <input type="checkbox" id="steep-check" checked>
+                    <label for="steep-check">蒸らし湯量固定</label>
+                </div>
+                <div class="convert-button-parent">
+                    <button class="convert-button">変換</button>
+                </div>
+
+            </form>
+        </div> <!--/item:変換目標入力欄-->
+
+        <!--変換後レシピの出力欄-->
+        <div class="item output-recipe-div">
+            <h3>変換後レシピ</h3>
+            <p>変換後の豆量(g):<span class="bean-output"></span> g</p>
+            <p>変換後の総湯量(ml):<span class="water-output wide-input"></span> ml</p>
+            <table class="recipe-output">
+            </table>
+        </div> <!-- /item:変換後レシピの出力欄 -->
+
+        <!--ストップウォッチ-->
+        <div class="item timer-div">
+            <h3 class="accordion-head">
+                <div class="accordion-toggle">></div>
+                <p>ストップウォッチ</p>
+            </h3>
+            <div class="timer-items">
+                <p id="time" class="timer-item">00:00</p> <!--ここに時間表示-->
+                <div id="timer-buttons" class="timer-item">
+                    <button class="timer-button" id="start">start</button>
+                    <button class="timer-button" id="stop">stop</button>
+                    <button class="timer-button" id="reset">reset</button>
+                </div>
+            </div>
+        </div> <!--/item:ストップウォッチ-->
+
+    </div> <!--/container-->
+
+    <footer>
+        <p class="copy-right">©Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+        <button class="pageTop-button">ページトップへ</button>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script/jquery-3.4.1.min.js"></script> <!-- jQuery -->
+    <script src="script/common.js"></script>
+    <script src="script/index.js"></script>
+</body>
+
+</html>
