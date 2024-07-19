@@ -17,7 +17,7 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <!-- OGP -->
-    <meta property="og:title" content="コーヒーレシピ変換器">
+    <meta property="og:title" content="Co-fitting(コーヒーレシピ変換器)">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hiruge-tools.com">
     <meta property="og:image" content="https://hiruge-tools.com/images/ogp.png">
@@ -25,10 +25,13 @@
     <!-- SEO -->
     <meta name="description" content="コーヒーレシピ変換器">
     <meta name="description" content="Coffee-fitting">
+    <meta name="description" content="Co-fitting">
     <meta name="description" content="コーヒー">
     <meta name="description" content="レシピ">
     <meta name="description" content="変換">
     <meta name="description" content="コーヒーの味を保ちながら量を変えるための変換器">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2754879937539027" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -49,16 +52,53 @@
     </script>
 
     <header>
-        <h1>コーヒーレシピ変換器</h1>
+        <div class="header-area">
+            <h1><a href="index.html">Co-fitting</a></h1>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul class="slide-menu">
+            <li><a href="index.html">変換ページへ</a></li>
+            <li><a href="how-to-use.html">変換器の使い方</a></li>
+            <li><a href="introduce-preset.html">プリセットレシピ引用元</a></li>
+            <li><a href="coffee-theory.html">変換器を成り立たせるコーヒー理論</a></li>
+        </ul>
     </header>
 
     <div class="introduce">
         <h2 class="sub-title">バランスキープ、量変換。<br>既存レシピの調整に</h2>
-        <a href="how-to-use.html" target="_blank">変換器の使い方(別タブで開きます)</a>
+    </div>
+
+    <div class="ice-check-container">
+        <div class="ice-check-item">
+            <input type="checkbox" id="ice-check">
+            <label for="ice-check">アイスモード</label>
+        </div>
     </div>
 
     <!-- コンテンツはFlexBoxでレイアウト指定する -->
     <div class="container">
+        <div id="preset-recipe-div" class="item">
+            <h3 class="accordion-head">
+                <div class="accordion-toggle">></div>
+                <p>プリセットレシピ呼び出し</p>
+            </h3>
+            <div class="preset-buttons">
+                <div class="accordion-item">
+                    <button id="4-6method" class="preset-button">4:6メソッド</button>
+                </div>
+                <div class="accordion-item">
+                    <button id="4-6method-ice" class="preset-button">4:6メソッド(アイス)</button>
+                </div>
+                <div class="accordion-item">
+                    <button id="hatakeyamasan" class="preset-button">畠山大輝氏レシピ</button>
+                </div>
+            </div>
+        </div>
+
         <div class="item origin-recipe-div">
             <h3>変換前レシピ入力欄</h3>
             <form action="#">
@@ -69,33 +109,38 @@
                 </div>
                 <!--変換前レシピの豆量入力欄-->
                 <div>
-                    <label for="bean-input">変換前レシピの豆量(g): </label><input type="text" id="bean-input" maxlength="2" onkeyup="nextField(this)"> g
+                    <label for="bean-input">変換前レシピの豆量(g): </label>
+                    <input type="text" id="bean-input" maxlength="2" onkeyup="nextField(this)"> g
                 </div>
                 <!-- 変換前レシピの比率表示欄 -->
                 <div>
                     <p>変換前の豆と湯の比率: 1:<span id="origin-ratio"></span></p>
                 </div>
+                <div class="ice-input-div">
+                </div>
                 <!--変換前レシピの入力欄(pour-times-inputの投数分だけフォームを生成)-->
                 <h4>変換前レシピ</h4>
-                    <p>投数 経過時間 総注湯量</p>
-                    <div class="origin-process"><!--変換前レシピの入力欄を生成するためのdiv-->
-                        <!-- 1･2投目は確実に使うだろうから最初から表示しておく -->
-                        <div class="pour-step1">
-                            <label>1投目</label>
-                            <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input type="text" class="seconds" value="00" maxlength="2" onkeyup="nextField(this)">
-                            <input type="text" class="pour-ml wide-input" value="30" maxlength="2" onkeyup="nextField(this)"> ml
-                        </div>
-                        <div class="pour-step2">
-                            <label>2投目</label>
-                            <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input type="text" class="seconds" value="30" maxlength="2" onkeyup="nextField(this)">
-                            <input type="text" class="pour-ml wide-input" maxlength="3" onkeyup="nextField(this)"> ml
-                        </div>
+                <p>投数 経過時間 総注湯量</p>
+                <div class="origin-process"><!--変換前レシピの入力欄を生成するためのdiv-->
+                    <!-- 1･2投目は確実に使うだろうから最初から表示しておく -->
+                    <div class="pour-step1">
+                        <label>1投目</label>
+                        <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input
+                            type="text" class="seconds" value="00" maxlength="2" onkeyup="nextField(this)">
+                        <input type="text" class="pour-ml wide-input" value="30" maxlength="2"
+                            onkeyup="nextField(this)"> ml
                     </div>
+                    <div class="pour-step2">
+                        <label>2投目</label>
+                        <input type="text" class="minutes" value="0" maxlength="1" onkeyup="nextField(this)">:<input
+                            type="text" class="seconds" value="30" maxlength="2" onkeyup="nextField(this)">
+                        <input type="text" class="pour-ml wide-input" maxlength="3" onkeyup="nextField(this)"> ml
+                    </div>
+                </div>
             </form>
         </div> <!--/変換前レシピの入力欄-->
 
         <!--変換目標入力欄-->
-        <!-- todo:"倍率"入力欄を作り、それを入力するだけで比率を維持したままn倍できる機能を実装 -->
         <div class="item target-recipe-div">
             <form action="#">
                 <h3>変換目標入力欄</h3>
@@ -138,6 +183,7 @@
             <h3>変換後レシピ</h3>
             <p>変換後の豆量(g):<span class="bean-output"></span> g</p>
             <p>変換後の総湯量(ml):<span class="water-output wide-input"></span> ml</p>
+            <p class="ice-mode-show">変換後の氷量(g):<span class="ice-output wide-input"></span> g</p>
             <table class="recipe-output">
             </table>
         </div> <!-- /item:変換後レシピの出力欄 -->
@@ -149,20 +195,23 @@
                 <p>ストップウォッチ</p>
             </h3>
             <div class="timer-items">
-                <p id="time" class="timer-item">00:00</p> <!--ここに時間表示-->
-                <div id="timer-buttons" class="timer-item">
-                    <button class="timer-button" id="start">start</button>
-                    <button class="timer-button" id="stop">stop</button>
-                    <button class="timer-button" id="reset">reset</button>
+                <p id="time" class="timer-item accordion-item">00:00</p> <!--ここに時間表示-->
+                <div id="timer-buttons" class="timer-item accordion-item">
+                    <button class="timer-button" id="start">▶</button>
+                    <button class="timer-button" id="stop">■</button>
+                    <button class="timer-button" id="reset">↻</button>
                 </div>
             </div>
         </div> <!--/item:ストップウォッチ-->
 
     </div> <!--/container-->
 
+    <div class="pageTop-button-div">
+        <button class="pageTop-button"><img src="images/pageTopButton.png" /></button>
+    </div>
+
     <footer>
-        <p class="copy-right">©Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-        <button class="pageTop-button">ページトップへ</button>
+        <button><a href="https://forms.gle/gJyF6PwvNZD2rr1C7" target="_blank">お問い合わせ</a></button>
     </footer>
 
     <!-- JavaScript -->

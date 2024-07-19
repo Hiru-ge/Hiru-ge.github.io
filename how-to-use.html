@@ -7,7 +7,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css"> <!-- リセットCSS -->
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/how-to-use.css">
+    <link rel="stylesheet" href="css/describe.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,124 +17,145 @@
     <!-- ファビコン -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <!-- OGP -->
-    <meta property="og:title" content="コーヒーレシピ変換器">
+    <meta property="og:title" content="Co-fitting(コーヒーレシピ変換器)">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="http://hiruge-tools.com/Coffee-fitting/">
-    <meta property="og:image" content="http://hiruge-tools.com/Coffee-fitting/images/ogp.png">
+    <meta property="og:url" content="https://hiruge-tools.com">
+    <meta property="og:image" content="https://hiruge-tools.com/images/ogp.png">
     <meta property="og:description" content="コーヒーの味を保ちながら量を変えるための変換器">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2754879937539027" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
-        <h1>コーヒーレシピ変換器の使い方</h1>
+        <div class="header-area">
+            <h1><a href="index.html">Co-fitting</a></h1>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul class="slide-menu">
+            <li><a href="index.html">変換ページへ</a></li>
+            <li><a href="how-to-use.html">変換器の使い方</a></li>
+            <li><a href="introduce-preset.html">プリセットレシピ引用元</a></li>
+            <li><a href="coffee-theory.html">変換器を成り立たせるコーヒー理論</a></li>
+        </ul>
     </header>
 
     <div class="container">
-        <div class="how-to-item">
+        <div class="container-item">
             <h2>コーヒーレシピ変換器</h2>
             <p>コーヒーレシピ変換器は、既存のコーヒーレシピを異なる投入量や豆の量に変換するためのツールです。このツールを使用すると、既存レシピのバランスを維持しながらレシピを調整できます。</p>
         </div>
-        <div class="how-to-item">
+        <div class="container-item">
             <h2>特徴</h2>
-            <ul>
-                <li>
-                    <h3>バランスキープ</h3>
-                </li>
-                <ul>
-                    <li>既存レシピにおける各投の割合を維持したまま、レシピを変換します。</li>
-                </ul>
-                <li>
-                    <h3>簡単な操作</h3>
-                </li>
-                <ul>
-                    <li>入力フォームに必要な情報を入力し、変換ボタンをクリックするだけで変換されたレシピが表示されます。</li>
-                </ul>
-                <li>
-                    <h3>ストップウォッチ機能</h3>
-                </li>
-                <ul>
-                    <li>抽出時に使用するためのストップウォッチ機能が付いています。</li>
-                </ul>
-            </ul>
+            <h3>バランスキープ</h3>
+            <p>既存レシピにおける各投の割合を維持したまま、レシピを変換します。</p>
+            <h3>簡単な操作</h3>
+            <p>入力フォームに必要な情報を入力し、変換ボタンをクリックするだけで変換されたレシピが表示されます。</p>
+            <h3>ストップウォッチ機能</h3>
+            <p>抽出時に使用するためのストップウォッチ機能が付いています。</p>
         </div>
-        <div class="how-to-item">
+        <div class="container-item">
             <h2>使い方</h2>
             <ol>
                 <h3>
+                    <li>プリセットレシピ呼び出し</li>
+                </h3>
+                <img class="how-to-image" src="images/how-to-description/presetRecipe.png" alt="プリセットレシピ呼び出し">
+                <div>
+                    <p>プリセットレシピを呼び出すことができます。</p>
+                    <p>プリセットレシピは、変換前レシピ入力欄に自動的に入力されます。</p>
+                    <p>現在利用できるプリセットレシピは、<a href="introduce-preset.html">こちら</a>で紹介しています。</p>
+                </div>
+                <h3>
                     <li>変換前レシピ入力欄</li>
                 </h3>
+                <img class="how-to-image" src="images/how-to-description/originRecipeForm.png" alt="変換前レシピ入力欄">
                 <div>
+                    <p>変換する前のレシピの情報を入力します。</p>
+                    <p>投数、豆の量、そして各投入段階の経過時間と注湯量を記入します。</p>
                     <ul>
-                        <li>変換する前のレシピの情報を入力します。</li>
-                        <li>投数、豆の量、そして各投入段階の経過時間と注湯量を記入します。</li>
-                        <li>※ 投数を入力すると、その分だけレシピ入力欄が生成されます</li>
+                        <li class="supplement">投数を入力すると、その分だけレシピ入力欄が生成されます</li>
                     </ul>
+                    <p>アイスコーヒーを入れたい場合は、アイスコーヒーのチェックボックスをONにし、氷量を入力します。</p>
+                    <img class="how-to-image" class="how-to-image" src="images/how-to-description/originRecipeForm[ice-mode].png" alt="アイスコーヒー入力欄">
                 </div>
                 <h3>
                     <li>変換目標入力欄</li>
                 </h3>
+                <img class="how-to-image" src="images/how-to-description/targetParameterForm[bean,water].png" alt="変換目標入力欄">
                 <div>
+                    <p>変換後のレシピの情報を入力します。</p>
+                    <p>目標とする豆の量、総湯量、そして豆と湯の比率を指定します。</p>
+                    <p>倍率のみを入力してスムーズに変換を行うことも可能です</p>
+                    <img  class="how-to-image" src="images/how-to-description/targetParameterForm[convertRate].png" alt="変換目標入力欄[倍率変換]">
                     <ul>
-                        <li>変換後のレシピの情報を入力します。</li>
-                        <li>目標とする豆の量、総湯量、そして豆と湯の比率を指定します。</li>
-                        <li>倍率のみを入力してスムーズに変換を行うことも可能です</li>
                         <li class="supplement">豆量&総湯量と倍率が両方とも入力されている場合には、倍率が優先されます。</li>
                     </ul>
                     <h4>入力補助</h4>
-                    <ul>
-                        <li>豆量と総湯量の両方が入力されると自動的に比率が計算・入力されます。</li>
-                        <li>また、豆量あるいは総湯量のいずれかが入力された状態で比率が入力されると、もう一方が更新されます。</li>
-                    </ul>
+                        <p>豆量と総湯量の両方が入力されると自動的に比率が計算・入力されます。</p>
+                        <p>また、豆量あるいは総湯量のいずれかが入力された状態で比率が入力されると、もう一方が更新されます。</p>
                     <h4>目標入力フォームのクリア機能</h4>
+                    <p>入力された変換目標をクリアできます</p>
+                    <p>入力補助機能がある都合上、豆量・総湯量・比率が全て入力されていると目標値の変更が難しくなる問題を確認したため実装しました。</p>
                     <ul>
-                        <li>入力された変換目標をクリアできます</li>
-                        <li>入力補助機能がある都合上、豆量・総湯量・比率が全て入力されていると目標値の変更が難しくなる問題を確認したため実装しました。</li>
+                        <li class="supplement">蒸らし固定は基本的にONをオススメします。経験則ですが、蒸らし湯量の変化が味に与える影響は大きいものと見られます。<br>(大幅な最終量変化がある場合は固定OFFでも良いかも知れません)</li>
                     </ul>
-                    <li class="supplement">蒸らし固定は基本的にONをオススメします。経験則ですが、蒸らし湯量の変化が味に与える影響は大きいものと見られます。<br>(大幅な最終量変化がある場合は固定OFFでも良いかも知れません)</li>
                 </div>
                 <h3>
                     <li>変換ボタン</li>
                 </h3>
-                <ul>
-                    <li>入力が完了したら、変換ボタンをクリックしてレシピを変換します。</li>
-                </ul>
+                <p>入力が完了したら、変換ボタンをクリックしてレシピを変換します。</p>
                 <h3>
                     <li>変換後レシピの出力</li>
                 </h3>
-                <ul>
-                    <li>変換されたレシピが表形式で表示されます。</li>
-                </ul>
+                <img class="how-to-image" src="images/how-to-description/convertedRecipe.png" alt="変換後レシピの出力">
+                <p>変換されたレシピが表形式で表示されます。</p>
             </ol>
         </div>
-        <div class="how-to-item">
+        <div class="container-item">
             <h2>既知の問題</h2>
             <h4>湯の抜け</h4>
-            <ul>
-                <li>この変換器では、豆量変化による流速(湯の抜け)の変化が加味されていません。単純な比率変換であることを理解した上で、変換結果を参考にしてください。</li>
-                <li>湯の抜けが考慮されていないため、投数が少ない(3投以下)とかなり無理のあるレシピになってしまうことがあります。投数の多いレシピでお試しください。</li>
-            </ul>
+            <p>この変換器では、豆量変化による流速(湯の抜け)の変化が加味されていません。単純な比率変換であることを理解した上で、注湯タイミング等を適宜調整し、変換結果を参考にしてください。</p>
+            <p>湯の抜けが考慮されていないため、投数が少ない(3投以下)とかなり無理のあるレシピになってしまうことがあります。投数の多いレシピでお試しください。</p>
             <p>なお、この問題について現在具体的な改善の目処は立っていません。</p>
         </div>
-        <div class="how-to-item">
-            <h2>実装を予定している機能</h2>
-            <h4>氷量の変換</h4>
-            <p>アイスコーヒーのレシピにも対応できるよう、氷量の変換機能を実装しようと考えています</p>
+        <div class="container-item">
+            <h2>お問い合わせ</h2>
+            <p>バグ修正等は<a href="https://github.com/Hiru-ge/Co-fitting/issues">GitHubのissue</a>か、<a href="https://forms.gle/CfEUf7v42RYg8JhU7">Google Forms</a>までご連絡ください。</p>
+            <p>できればバグ報告はissueで、それが無理であればGoogle Formsからで全然大丈夫です!</p>
+            <p>Google Formsでは、バグ報告以外の「追加して欲しい機能」や「プリセットレシピに追加して欲しいレシピ」、「改善点」等の意見･要望も受け付けています!</p>
         </div>
-        <div class="how-to-item">
-            <h2>不具合等</h2>
-            <ul>
-                <li>バグ修正等は<a href="https://github.com/Hiruge-1/Coffee-fitting/issues">GitHubのissue</a>まで連絡ください。</li>
-            </ul>
+        <div class="container-item">
+            <h2>プライバシーポリシーとCookie</h2>
+            <h3>プライバシーポリシー</h3>
+            <p>当サイトは、第三者配信による広告サービス「Google AdSense」を利用しています。</p>
+            <p>広告配信事業者は、ユーザーの興味に応じた広告を表示するために、クッキー（Cookie）を使用することがあります。</p>
+            <p>クッキーを使用することで、当サイトはユーザーのコンピュータに保存されている過去の訪問履歴などの情報を取得することができます。</p>
+            <p>Google AdSenseの詳細については、<a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank">こちら</a>をご覧ください。</p>
+
+            <h3>クッキーの使用</h3>
+            <p>当サイトでは、Googleを含む第三者配信事業者がクッキーを使用して、ユーザーの過去の訪問履歴に基づいて広告を配信します。</p>
+            <p>ユーザーは、Googleの広告設定にアクセスして、パーソナライズ広告を無効にすることができます。</p>
+            <p>また、<a href="http://www.aboutads.info/choices/" target="_blank">www.aboutads.info</a>にアクセスすれば、パーソナライズ広告のクッキーを無効にすることもできます。</p>
+            
+            <h3>情報の収集と使用</h3>
+            <p>当サイトでは、アクセス解析ツール「Googleアナリティクス」を利用しています。このGoogleアナリティクスはトラフィックデータの収集のためにクッキーを使用しています。</p>
+            <p>このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+            <p>この機能はクッキーを無効にすることで収集を拒否することができますので、お使いのブラウザの設定をご確認ください。</p>
+            <p>この規約に関して、詳しくは<a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank">こちら</a>をご覧ください。</p>
         </div>
     </div>
 
-
-
-
+    <div class="pageTop-button-div">
+        <button class="pageTop-button"><img src="images/pageTopButton.png"/></button>
+    </div>
 
     <footer>
-        <p class="copy-right">©Icons by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-        <button class="pageTop-button">ページトップへ</button>
+        <button><a href="https://forms.gle/gJyF6PwvNZD2rr1C7" target="_blank">お問い合わせ</a></button>
     </footer>
 
     <!-- JavaScript -->
