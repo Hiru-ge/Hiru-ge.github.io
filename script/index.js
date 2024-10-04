@@ -98,7 +98,14 @@ $(document).ready(function() {
             }
 
             // プリセットレシピの比率を計算して表示
-            const OriginRatio = brewParameterCompleter([SelectedRecipe.bean_g, SelectedRecipe.water_ml, '']);
+            let selectedRecipeSumWater;
+            if(SelectedRecipe.ice_g){
+                // 氷量のデフォルト値を0として計算させても良いような気はするが、とりあえずはこの形で書いておく(後でリファクタリングするかも)
+                selectedRecipeSumWater = Number(SelectedRecipe.water_ml) + Number(SelectedRecipe.ice_g);
+            }else{
+                selectedRecipeSumWater = SelectedRecipe.water_ml;
+            }
+            const OriginRatio = brewParameterCompleter([SelectedRecipe.bean_g, selectedRecipeSumWater, '']);
             $('#origin-ratio').html(OriginRatio);
         }else{
             console.log('Error[presetActivate]: プリセットIDが不正です');
@@ -140,6 +147,10 @@ $(document).ready(function() {
     $('.origin-process').on('change', function(){
         const PourTimes = $('#pour-times-input').val();
         const OriginSumWater = $(`.pour-step${PourTimes}`).children('.pour-ml').val();
+        let isIceMode = $('#ice-check').prop('checked');
+        if(isIceMode){
+            OriginSumWater = Number(OriginSumWater) + Number($('#ice-input').val());
+        }
         const OriginBean = $('#bean-input').val();
         if (OriginBean && OriginSumWater) {
             const OriginRatio = brewParameterCompleter([/*豆量=*/OriginBean, /*総湯量=*/OriginSumWater, /*比率=*/'']);
@@ -149,7 +160,7 @@ $(document).ready(function() {
 
 
     // 変換目標入力欄の入力補助(豆量･総湯量･比率のどれか2つを入力すると、残り1つを計算して補完する)
-    $('.targetProcessComplete_argument').on('change', function(){
+    $('.targetBrewParameter').on('change', function(){
         let targetBean = $('#bean-target').val();
         let targetWater = $('#water-target').val();
         let targetRatio = $('#ratio-target').val();
@@ -173,9 +184,7 @@ $(document).ready(function() {
     // 変換目標入力欄のクリア
     $('.clear-button').on('click', function(){
         event.preventDefault(); // ページ遷移を防ぐ
-        $('#bean-target').val('');
-        $('#water-target').val('');
-        $('#ratio-target').val('');
+        $('#bean-target, #water-target, #ratio-target').val('');
     });
 
 
@@ -219,7 +228,7 @@ $(document).ready(function() {
             input_pour_mls.push($(`.pour-step${i}`).children('.pour-ml').val());
             totalWater_mls.push(Math.trunc(input_pour_mls[i] * convertRate));
             // 蒸らし固定ONの場合、1投目の総湯量は固定(元レシピの1投目の総湯量と同じ)
-            if (i === 1 && $('#steep-check').prop('checked')) {
+            if (i === 1 && $('#steep-keep-check').prop('checked')) {
                 totalWater_mls[1] = $(`.pour-step1`).children('.pour-ml').val();
             }
 
@@ -236,13 +245,14 @@ $(document).ready(function() {
         return Output;
     }
 
-    // レシピの変換･変換後レシピの出力
-    $('.convert-button').on('click', function(){
-        event.preventDefault(); // ページ遷移を防ぐ
-
-        // 変換前レシピの入力内容を取得
+    function toConvertValuesGetter() {
+        
         let pourTimes = $('#pour-times-input').val();
         let originWaterTotal_ml = $(`.pour-step${pourTimes}`).children('.pour-ml').val();
+        let ice_g = 0;  // ice_gの初期値は0としてNanを防ぎ、ice-modeなら正しい値で更新する
+        if($('#ice-check').prop('checked')){
+            ice_g = $('#ice-input').val();
+        }
 
         let targetBean_g, targetWaterTotal_ml, convertRate;
         if($('#magnification').val()){ // 変換率が手動入力されている場合は、それを採用して変換する
@@ -252,21 +262,31 @@ $(document).ready(function() {
         }else{        
             targetBean_g = $('#bean-target').val();
             targetWaterTotal_ml = $('#water-target').val();
-            convertRate = targetWaterTotal_ml / originWaterTotal_ml;
+            // 文字列に解釈されないよう、Number()で明示的に数値に変換
+            convertRate = targetWaterTotal_ml / (Number(originWaterTotal_ml) + Number(ice_g));  
         }
 
         // 入力エラー検知関数に処理を投げて、エラーがあればアラートを出して処理を中断
         if(inputError_Detector([pourTimes, originWaterTotal_ml, targetBean_g, targetWaterTotal_ml])=='Error'){
             return;
         }
+        return [pourTimes, originWaterTotal_ml, ice_g, targetBean_g, convertRate];
+    }
+
+    // レシピの変換･変換後レシピの出力
+    $('.convert-button').on('click', function(){
+        event.preventDefault(); // ページ遷移を防ぐ
+
+        // 変換前レシピの入力内容をモードに応じて取得
+        let [pourTimes, originWaterTotal_ml, ice_g, targetBean_g, convertRate] = toConvertValuesGetter();
 
         // 変換後の豆量と総湯量を転記(小数点第一位まで表示)
         $('.bean-output').text(Math.trunc(targetBean_g*10)/10);
-        $('.water-output').text(Math.trunc(targetWaterTotal_ml*10)/10);
-
-        // 氷量が入力されている場合、変換後の氷量を算出・出力
-        let convertedIce_g = Math.trunc($('#ice-input').val()*convertRate);
-        if(convertedIce_g){
+        $('.water-output').text(Math.trunc((originWaterTotal_ml*convertRate)*10)/10);
+        // 氷量が入力されている(アイスモードの)場合、変換後の氷量を算出・出力
+        let isIceMode = $('#ice-check').prop('checked');
+        if(isIceMode){
+            let convertedIce_g = Math.trunc(ice_g*convertRate);
             $('.ice-output').text(convertedIce_g);
         }
 
@@ -336,7 +356,6 @@ $(document).ready(function() {
     });
 
     // トグル機能
-    // Tips:JavaScriptで動かすと負荷がかかるので、必要に迫られればCSSでの実装も検討(滑らかに閉じるのが難しかったので現在はJSで実装)
     $('.accordion-item').hide();
     $('.accordion-head').on('click', function() {
         $(this).children('.accordion-toggle').toggleClass('rotate-90');

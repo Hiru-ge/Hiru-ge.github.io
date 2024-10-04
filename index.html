@@ -22,6 +22,14 @@
     <meta property="og:url" content="https://hiruge-tools.com">
     <meta property="og:image" content="https://hiruge-tools.com/images/ogp.png">
     <meta property="og:description" content="コーヒーの味を保ちながら量を変えるための変換器">
+    <!-- SEO -->
+    <meta name="description" content="コーヒーレシピ変換器">
+    <meta name="description" content="Coffee-fitting">
+    <meta name="description" content="Co-fitting">
+    <meta name="description" content="コーヒー">
+    <meta name="description" content="レシピ">
+    <meta name="description" content="変換">
+    <meta name="description" content="コーヒーの味を保ちながら量を変えるための変換器">
 </head>
 
 <body>
@@ -136,26 +144,27 @@
                 <h3>変換目標入力欄</h3>
                 <div>
                     <label for="bean-target">変換後の豆量(g): </label>
-                    <input type="text" id="bean-target" class="targetProcessComplete_argument wide-input"> g
+                    <input type="text" id="bean-target" class="targetBrewParameter wide-input"> g
                 </div>
                 <div>
-                    <label for="water-target">変換後の総湯量(ml): </label>
-                    <input type="text" id="water-target" class="targetProcessComplete_argument wide-input"> ml
+                    <label for="water-target">変換後の合計量(ml): </label>
+                    <input type="text" id="water-target" class="targetBrewParameter wide-input"> ml
                 </div>
                 <div>
-                    <label for="ratio-target" class="targetProcessComplete_argument">変換後の豆と湯の比率: 1:</label>
-                    <input type="text" id="ratio-target" class="targetProcessComplete_argument wide-input">
+                    <label for="ratio-target">変換後の豆と湯の比率: 1:</label>
+                    <input type="text" id="ratio-target" class="targetBrewParameter wide-input">
                 </div>
                 <div>
                     <!-- 単純な倍率での入力 -->
                     <label for="magnification">倍率: </label>
-                    <input type="text" id="magnification" class="targetProcessComplete_argument wide-input">倍
+                    <input type="text" id="magnification" class="targetBrewParameter wide-input">倍
                 </div>
                 <div>
                     <!--蒸らし固定ON/OFF-->
-                    <input type="checkbox" id="steep-check" checked>
-                    <label for="steep-check">蒸らし湯量固定</label>
+                    <input type="checkbox" id="steep-keep-check" checked>
+                    <label for="steep-keep-check">蒸らし湯量固定</label>
                 </div>
+                <!-- todo:ratio維持モードの追加 -->
                 <div class="convert-buttons">
                     <div class="convert-button-parent">
                         <button class="convert-button">変換</button>
@@ -171,9 +180,9 @@
         <!--変換後レシピの出力欄-->
         <div class="item output-recipe-div">
             <h3>変換後レシピ</h3>
-            <p>変換後の豆量(g):<span class="bean-output"></span> g</p>
-            <p>変換後の総湯量(ml):<span class="water-output wide-input"></span> ml</p>
-            <p class="ice-mode-show">変換後の氷量(g):<span class="ice-output wide-input"></span> g</p>
+            <p>豆量:<span class="bean-output"></span> g</p>
+            <p>総湯量:<span class="water-output wide-input"></span> ml</p>
+            <p class="ice-mode-show">氷量:<span class="ice-output wide-input"></span> g</p>
             <table class="recipe-output">
             </table>
         </div> <!-- /item:変換後レシピの出力欄 -->
@@ -193,7 +202,6 @@
                 </div>
             </div>
         </div> <!--/item:ストップウォッチ-->
-
     </div> <!--/container-->
 
     <div class="pageTop-button-div">
