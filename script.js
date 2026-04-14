@@ -77,7 +77,7 @@ async function copyGiftCode() {
 
   try {
     await navigator.clipboard.writeText(decodedGiftCode);
-    setStatus("コピーしました。そのまま貼り付けできます");
+    setStatus("コピー完了！そのまま貼り付けられるよ");
     showRedeemLink();
   } catch {
     // 古い環境向けのフォールバック。
@@ -93,7 +93,7 @@ async function copyGiftCode() {
     document.body.removeChild(temp);
 
     if (succeeded) {
-      setStatus("コピーしました。そのまま貼り付けできます");
+      setStatus("コピー完了！そのまま貼り付けられるよ");
       showRedeemLink();
       return;
     }
