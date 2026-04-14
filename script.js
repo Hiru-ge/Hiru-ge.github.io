@@ -4,6 +4,7 @@ const giftCodeEl = document.getElementById("giftCode");
 const copyBtn = document.getElementById("copyBtn");
 const statusMessage = document.getElementById("statusMessage");
 const confettiLayer = document.getElementById("confettiLayer");
+const redeemArea = document.getElementById("redeemArea");
 
 let decodedGiftCode = "";
 
@@ -62,6 +63,12 @@ function launchConfetti(count = 34) {
   }
 }
 
+function showRedeemLink() {
+  if (redeemArea) {
+    redeemArea.hidden = false;
+  }
+}
+
 async function copyGiftCode() {
   if (!decodedGiftCode) {
     setStatus("コピーできるコードがありません", true);
@@ -71,6 +78,7 @@ async function copyGiftCode() {
   try {
     await navigator.clipboard.writeText(decodedGiftCode);
     setStatus("コピーしました。そのまま貼り付けできます");
+    showRedeemLink();
   } catch {
     // 古い環境向けのフォールバック。
     const temp = document.createElement("textarea");
@@ -86,6 +94,7 @@ async function copyGiftCode() {
 
     if (succeeded) {
       setStatus("コピーしました。そのまま貼り付けできます");
+      showRedeemLink();
       return;
     }
 

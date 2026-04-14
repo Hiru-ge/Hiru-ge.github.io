@@ -45,6 +45,15 @@
             <button id="copyBtn" type="button">コードをコピー</button>
           </div>
           <p id="statusMessage" class="status" role="status" aria-live="polite"></p>
+          <div id="redeemArea" hidden>
+            <a
+              id="redeemLink"
+              class="redeem-link"
+              href="https://www.netflix.com/redeem"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Netflix でコードを使う</a>
+          </div>
         </section>
 
         <details class="help">
@@ -52,9 +61,12 @@
           <p>
             https://hiru-ge.github.io/#ギフトコード
           </p>
-          <p>リボン画像は ./assets/ribbon.png を使用します</p>
         </details>
       </section>
+
+      <p class="disclaimer">
+        ※このサイトで発生したトラブルについては一切責任を負いかねます。URLの作成やコードの管理は自己責任でお願いします。
+      </p>
 
       <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
     </main>
