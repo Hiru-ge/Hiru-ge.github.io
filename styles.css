@@ -4,10 +4,47 @@
   --card: #1f1f1f;
   --ink: #e5e5e5;
   --accent: #e50914;
-  --accent-2: #b20710;
+  --accent-hover: #f40612;
+  --accent-shadow: rgba(229, 9, 20, 0.4);
+  --accent-soft: rgba(229, 9, 20, 0.15);
   --line: #333333;
-  --success: #46d369;
+  --status-success: #46d369;
+  --status-error: #b42318;
+  --gift-body-top: #8b0000;
+  --gift-body-bottom: #5c0000;
+  --gift-lid-top: #a30000;
+  --gift-lid-bottom: #6e0000;
+  --gift-ribbon: #e50914;
+  --gift-bow-shadow: rgba(100, 24, 24, 0.2);
+  --orb-a-top: #e50914;
+  --orb-a-bottom: #7b0000;
+  --orb-b-top: #b20710;
+  --orb-b-bottom: #4a0000;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+body[data-theme="amazon"] {
+  --bg-top: #131921;
+  --bg-bottom: #0f141b;
+  --card: #1b2430;
+  --ink: #f4f6f8;
+  --accent: #ff9900;
+  --accent-hover: #ffad33;
+  --accent-shadow: rgba(255, 153, 0, 0.4);
+  --accent-soft: rgba(255, 153, 0, 0.16);
+  --line: #394150;
+  --status-success: #5fd38d;
+  --status-error: #ff9c8f;
+  --gift-body-top: #27374d;
+  --gift-body-bottom: #1b2735;
+  --gift-lid-top: #364c68;
+  --gift-lid-bottom: #2a3c52;
+  --gift-ribbon: #ff9900;
+  --gift-bow-shadow: rgba(0, 0, 0, 0.25);
+  --orb-a-top: #ff9900;
+  --orb-a-bottom: #d97600;
+  --orb-b-top: #2f3f56;
+  --orb-b-bottom: #1d2838;
 }
 
 * {
@@ -112,7 +149,7 @@ h1 {
   width: 76%;
   height: 50%;
   top: 38%;
-  background: linear-gradient(180deg, #8b0000, #5c0000);
+  background: linear-gradient(180deg, var(--gift-body-top), var(--gift-body-bottom));
   box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.35);
 }
 
@@ -120,7 +157,7 @@ h1 {
   width: 84%;
   height: 20%;
   top: 24%;
-  background: linear-gradient(180deg, #a30000, #6e0000);
+  background: linear-gradient(180deg, var(--gift-lid-top), var(--gift-lid-bottom));
   transform-origin: 15% 88%;
   transition: transform 640ms cubic-bezier(0.2, 0.7, 0.2, 1), top 640ms;
   box-shadow: 0 7px 16px rgba(0, 0, 0, 0.5);
@@ -136,7 +173,7 @@ h1 {
   transform: translateX(-50%);
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 4px 8px rgba(100, 24, 24, 0.2));
+  filter: drop-shadow(0 4px 8px var(--gift-bow-shadow));
   z-index: 60;
 }
 
@@ -144,14 +181,14 @@ h1 {
   top: 33%;
   width: 10%;
   height: 54%;
-  background: #e50914;
+  background: var(--gift-ribbon);
 }
 
 .gift-ribbon-h {
   top: 32%;
   width: 84%;
   height: 10%;
-  background: #e50914;
+  background: var(--gift-ribbon);
 }
 
 .gift-box.opened .gift-lid {
@@ -201,15 +238,15 @@ button#copyBtn {
 
 button#copyBtn:hover {
   transform: translateY(-1px);
-  background: #f40612;
-  box-shadow: 0 10px 24px rgba(229, 9, 20, 0.4);
+  background: var(--accent-hover);
+  box-shadow: 0 10px 24px var(--accent-shadow);
 }
 
 .status {
   min-height: 1.2em;
   margin-top: 10px;
   font-size: 0.9rem;
-  color: var(--success);
+  color: var(--status-success);
 }
 
 .help {
@@ -236,7 +273,7 @@ button#copyBtn:hover {
 }
 
 .redeem-link:hover {
-  background: rgba(229, 9, 20, 0.15);
+  background: var(--accent-soft);
 }
 
 .help p {
@@ -274,7 +311,7 @@ button#copyBtn:hover {
   aspect-ratio: 1 / 1;
   top: 8%;
   left: -60px;
-  background: radial-gradient(circle at 30% 30%, #e50914, #7b0000);
+  background: radial-gradient(circle at 30% 30%, var(--orb-a-top), var(--orb-a-bottom));
 }
 
 .orb-b {
@@ -282,7 +319,7 @@ button#copyBtn:hover {
   aspect-ratio: 1 / 1;
   bottom: 8%;
   right: -60px;
-  background: radial-gradient(circle at 30% 30%, #b20710, #4a0000);
+  background: radial-gradient(circle at 30% 30%, var(--orb-b-top), var(--orb-b-bottom));
 }
 
 @keyframes slide-in {

@@ -3,73 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Birthday Gift Code</title>
-    <meta
-      name="description"
-      content="URLハッシュからギフトコードを安全に表示する、個人利用向けの静的ギフトページ"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=/netflix/" />
+    <script>
+      const target = `/netflix/${window.location.search || ""}${window.location.hash || ""}`;
+      window.location.replace(target);
+    </script>
   </head>
   <body>
-    <div class="bg-orb orb-a" aria-hidden="true"></div>
-    <div class="bg-orb orb-b" aria-hidden="true"></div>
-
-    <main class="page" aria-live="polite">
-
-      <section class="card" aria-label="ギフトカード">
-        <h1>Happy Birthday</h1>
-        <p class="lead">箱をタップしてギフトを開いてね</p>
-
-        <div class="gift-scene">
-          <button class="gift-box" id="openGiftBtn" type="button" aria-label="ギフトを開封">
-            <span class="gift-lid" aria-hidden="true">
-              <img class="gift-bow-image" src="./assets/ribbon.png" alt="" aria-hidden="true" />
-            </span>
-            <span class="gift-body" aria-hidden="true"></span>
-            <span class="gift-ribbon-v" aria-hidden="true"></span>
-            <span class="gift-ribbon-h" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <section class="code-panel" id="codePanel" hidden>
-          <p class="code-label">ギフトコード</p>
-          <p class="code-value" id="giftCode" aria-label="ギフトコード">----</p>
-          <div class="actions">
-            <button id="copyBtn" type="button">コードをコピー</button>
-          </div>
-          <p id="statusMessage" class="status" role="status" aria-live="polite"></p>
-          <div id="redeemArea" hidden>
-            <a
-              id="redeemLink"
-              class="redeem-link"
-              href="https://www.netflix.com/redeem"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Netflix でコードを使う</a>
-          </div>
-        </section>
-
-        <details class="help">
-          <summary>URLの作り方</summary>
-          <p>
-            https://hiru-ge.github.io/#ギフトコード
-          </p>
-        </details>
-      </section>
-
-      <p class="disclaimer">
-        ※このサイトで発生したトラブルについては一切責任を負いかねます。URLの作成やコードの管理は自己責任でお願いします。
-      </p>
-
-      <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
-    </main>
-
-    <script src="./script.js"></script>
+    <p>
+      <a href="/netflix/">Netflixページへ移動</a>
+    </p>
   </body>
 </html>

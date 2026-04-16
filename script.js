@@ -5,6 +5,11 @@ const copyBtn = document.getElementById("copyBtn");
 const statusMessage = document.getElementById("statusMessage");
 const confettiLayer = document.getElementById("confettiLayer");
 const redeemArea = document.getElementById("redeemArea");
+const pageConfig = {
+  confettiColors:
+    document.body.dataset.confettiColors?.split(",").map((color) => color.trim()).filter(Boolean) ||
+    ["#f97316", "#f59e0b", "#f43f5e", "#fb7185", "#eab308"],
+};
 
 let decodedGiftCode = "";
 
@@ -37,7 +42,9 @@ function setStatus(message, isError = false) {
   }
 
   statusMessage.textContent = message;
-  statusMessage.style.color = isError ? "#b42318" : "#1f8d4a";
+  statusMessage.style.color = isError
+    ? "var(--status-error, #b42318)"
+    : "var(--status-success, #1f8d4a)";
 }
 
 function launchConfetti(count = 34) {
@@ -45,7 +52,7 @@ function launchConfetti(count = 34) {
     return;
   }
 
-  const colors = ["#f97316", "#f59e0b", "#f43f5e", "#fb7185", "#eab308"];
+  const colors = pageConfig.confettiColors;
 
   for (let i = 0; i < count; i += 1) {
     const piece = document.createElement("span");
